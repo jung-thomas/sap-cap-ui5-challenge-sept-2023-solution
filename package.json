@@ -1,18 +1,22 @@
 {
   "name": "sap-cap-ui5-challenge",
   "version": "1.0.0",
-  "description": "A simple CAP project.",
+  "description": "September Developer Challenge: Full-Stack Development",
   "repository": "<Add your repository here>",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
     "@sap/cds": "^7",
-    "express": "^4"
+    "express": "^4",
+    "@sap/cds-common-content": "^1.2.0",
+    "@sap/cds-fiori": "^1.0.0"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds-serve",
+    "dev": "cds watch --livereload false",
+    "openapi": "cds compile srv --service all -o docs --to openapi --openapi:diagram"
   }
 }
