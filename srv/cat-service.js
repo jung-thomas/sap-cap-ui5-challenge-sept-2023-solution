@@ -14,24 +14,21 @@ module.exports = class DevChallengeService extends cds.ApplicationService {
             return {"message": message}
         }
 
-        const expr = cds.parse.expr(`test_ID is null`)
         const Items = await cds.run(
-            SELECT.from(Questions).where(expr).limit(questionsCount))
+            SELECT.from(Questions).where({test_ID: null}).limit(questionsCount))
 
         if(!Items || Items.length === 0){
             message =  `No Questions remaining that can be assigned to a test. Please create more`
             return {"message": message}
         }
 
-
-        Items.forEach(item => {
+        for await (const item of Items){
             item.test_ID = keys.ID
-            const expr = cds.parse.expr(`ID = '${item.ID}'`)
-            cds.run(UPDATE.entity(Questions).data(item).where(expr))
-        })
-        const expr2 = cds.parse.expr(`ID = '${keys.ID}'`)
+            await cds.run(UPDATE.entity(Questions).data(item).where({ID: item.ID}))
+        }
+        await cds.run(UPDATE.entity(Tests).set({modifiedAt: new Date()}).where({ID: keys.ID}))
         const TestOutput = await cds.run(            
-            SELECT.from(Tests).where(expr2)
+            SELECT.from(Tests).where({ID: keys.ID})
         )
         if (questionsCount > Items.length){
             message = `Only ${Items.length} questions available, but you requested ${questionsCount}`
