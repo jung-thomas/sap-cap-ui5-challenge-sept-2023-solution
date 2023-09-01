@@ -135,6 +135,24 @@
                                         "route": "QuestionsObjectPage"
                                     }
                                 }
+                            },
+                            "content": {
+                                "header": {
+                                    "actions": {
+                                        "text": {
+                                            "text": "Add Questions"
+                                        },
+                                        "press": {
+                                            "press": "sapcapui5challenge.ext.actions.actions.generateTestQuestions"
+                                        },
+                                        "visible": {
+                                            "visible": true
+                                        },
+                                        "enabled": {
+                                            "enabled": true
+                                        }
+                                    }
+                                }
                             }
                         }
                     }

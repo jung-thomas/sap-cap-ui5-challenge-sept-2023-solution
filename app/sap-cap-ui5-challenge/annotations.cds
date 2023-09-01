@@ -50,6 +50,14 @@ annotate service.Tests with @(
             {
                 $Type: 'UI.DataField',
                 Value: createdAt,
+            },
+                        {
+                $Type: 'UI.DataField',
+                Value: modifiedBy,
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: modifiedAt,
             }
         ],
     },
