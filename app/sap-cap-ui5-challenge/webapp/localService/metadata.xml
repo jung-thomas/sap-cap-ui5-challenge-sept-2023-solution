@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+        <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="DevChallengeService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="Tests" EntityType="DevChallengeService.Tests">
+                    <NavigationPropertyBinding Path="questions" Target="Questions"/>
+                </EntitySet>
+                <EntitySet Name="Questions" EntityType="DevChallengeService.Questions">
+                    <NavigationPropertyBinding Path="test" Target="Tests"/>
+                    <NavigationPropertyBinding Path="answer" Target="Questions_answer"/>
+                </EntitySet>
+                <EntitySet Name="testReturn" EntityType="DevChallengeService.testReturn">
+                    <NavigationPropertyBinding Path="randomQuestions" Target="Questions"/>
+                    <NavigationPropertyBinding Path="testQuestions" Target="Tests"/>
+                </EntitySet>
+                <EntitySet Name="Questions_answer" EntityType="DevChallengeService.Questions_answer">
+                    <NavigationPropertyBinding Path="up_" Target="Questions"/>
+                </EntitySet>
+            </EntityContainer>
+            <EntityType Name="Tests">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+                <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+                <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+                <NavigationProperty Name="questions" Type="Collection(DevChallengeService.Questions)" Partner="test"/>
+                <Property Name="title" Type="Edm.String"/>
+                <Property Name="description" Type="Edm.String"/>
+            </EntityType>
+            <EntityType Name="Questions">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <NavigationProperty Name="test" Type="DevChallengeService.Tests" Partner="questions">
+                    <ReferentialConstraint Property="test_ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="test_ID" Type="Edm.Guid"/>
+                <Property Name="text" Type="Edm.String"/>
+                <NavigationProperty Name="answer" Type="DevChallengeService.Questions_answer" Partner="up_">
+                    <OnDelete Action="Cascade"/>
+                    <ReferentialConstraint Property="up__ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+            </EntityType>
+            <EntityType Name="testReturn">
+                <Property Name="message" Type="Edm.String"/>
+                <NavigationProperty Name="randomQuestions" Type="Collection(DevChallengeService.Questions)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <Property Name="randomQuestions_ID" Type="Edm.Guid"/>
+                <NavigationProperty Name="testQuestions" Type="Collection(DevChallengeService.Tests)">
+                    <OnDelete Action="Cascade"/>
+                </NavigationProperty>
+                <Property Name="testQuestions_ID" Type="Edm.Guid"/>
+            </EntityType>
+            <EntityType Name="Questions_answer">
+                <Key>
+                    <PropertyRef Name="up__ID"/>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <NavigationProperty Name="up_" Type="DevChallengeService.Questions" Nullable="false" Partner="answer">
+                    <ReferentialConstraint Property="up__ID" ReferencedProperty="ID"/>
+                </NavigationProperty>
+                <Property Name="up__ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="ID" Type="Edm.Guid" Nullable="false"/>
+                <Property Name="text" Type="Edm.String"/>
+            </EntityType>
+            <Action Name="generateTestQuestions" IsBound="true">
+                <Parameter Name="in" Type="DevChallengeService.Tests"/>
+                <Parameter Name="questionsCount" Type="Edm.Int32"/>
+                <ReturnType Type="Collection(DevChallengeService.testReturn)" Nullable="false"/>
+            </Action>
+            <Annotations Target="DevChallengeService.Tests/createdAt">
+                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                <Annotation Term="Core.Immutable" Bool="true"/>
+                <Annotation Term="Core.Computed" Bool="true"/>
+                <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+                </Annotations>
+                <Annotations Target="DevChallengeService.Tests/createdBy">
+                    <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                    <Annotation Term="Core.Immutable" Bool="true"/>
+                    <Annotation Term="Core.Computed" Bool="true"/>
+                    <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+                        </Annotations>
+                        <Annotations Target="DevChallengeService.Tests/modifiedAt">
+                            <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                            <Annotation Term="Core.Computed" Bool="true"/>
+                            <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+                            </Annotations>
+                            <Annotations Target="DevChallengeService.Tests/modifiedBy">
+                                <Annotation Term="UI.HiddenFilter" Bool="true"/>
+                                <Annotation Term="Core.Computed" Bool="true"/>
+                                <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+                                    <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+                                    </Annotations>
+                                    <Annotations Target="DevChallengeService.EntityContainer/testReturn">
+                                        <Annotation Term="Capabilities.DeleteRestrictions">
+                                            <Record Type="Capabilities.DeleteRestrictionsType">
+                                                <PropertyValue Property="Deletable" Bool="false"/>
+                                            </Record>
+                                        </Annotation>
+                                        <Annotation Term="Capabilities.InsertRestrictions">
+                                            <Record Type="Capabilities.InsertRestrictionsType">
+                                                <PropertyValue Property="Insertable" Bool="false"/>
+                                            </Record>
+                                        </Annotation>
+                                        <Annotation Term="Capabilities.UpdateRestrictions">
+                                            <Record Type="Capabilities.UpdateRestrictionsType">
+                                                <PropertyValue Property="Updatable" Bool="false"/>
+                                            </Record>
+                                        </Annotation>
+                                    </Annotations>
+                                </Schema>
+                            </edmx:DataServices>
+                        </edmx:Edmx>

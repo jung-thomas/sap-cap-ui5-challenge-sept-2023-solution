@@ -7,16 +7,21 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^7",
-    "express": "^4",
     "@sap/cds-common-content": "^1.2.0",
-    "@sap/cds-fiori": "^1.0.0"
+    "@sap/cds-fiori": "^1.0.0",
+    "express": "^4"
   },
   "devDependencies": {
-    "@cap-js/sqlite": "^1"
+    "@cap-js/sqlite": "^1",
+    "@sap/ux-specification": "^1.108.12"
   },
   "scripts": {
     "start": "cds-serve",
     "dev": "cds watch --livereload false",
-    "openapi": "cds compile srv --service all -o docs --to openapi --openapi:diagram"
-  }
+    "openapi": "cds compile srv --service all -o docs --to openapi --openapi:diagram",
+    "watch-sap-cap-ui5-challenge": "cds watch --open sap-cap-ui5-challenge/webapp/index.html?sap-ui-xx-viewCache=false"
+  },
+  "sapux": [
+    "app/sap-cap-ui5-challenge"
+  ]
 }
