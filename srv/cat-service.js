@@ -7,6 +7,7 @@ module.exports = class DevChallengeService extends cds.ApplicationService {
     }
 
     async generateTestQuestions(TestsIn, keys, questionsCount) {
+        console.log(questionsCount)
         const { Tests, Questions } = this.entities()
         const expr = cds.parse.expr(`test_ID is null`)
         const Items = await cds.run(

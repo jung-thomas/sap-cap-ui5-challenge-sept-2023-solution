@@ -139,17 +139,12 @@
                             "content": {
                                 "header": {
                                     "actions": {
-                                        "text": {
+                                        "actions": {
+                                            "press": "sapcapui5challenge.ext.actions.actions.generateTestQuestions",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "requiresSelection": false,
                                             "text": "Add Questions"
-                                        },
-                                        "press": {
-                                            "press": "sapcapui5challenge.ext.actions.actions.generateTestQuestions"
-                                        },
-                                        "visible": {
-                                            "visible": true
-                                        },
-                                        "enabled": {
-                                            "enabled": true
                                         }
                                     }
                                 }

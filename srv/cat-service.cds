@@ -1,8 +1,7 @@
 using fullstack_dev_challenge as challenge from '../db/data-model';
 
 @protocol: [
-  'odata-v4',
-  'graphql'
+  'odata-v4'
 ]
 service DevChallengeService @(path: 'dev-challenge') {
 
