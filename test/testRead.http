@@ -1,0 +1,2 @@
+get http://localhost:4004/dev-challenge/Tests?$format=application/json;odata.metadata=full
+Accept: application/json;odata.metadata=full

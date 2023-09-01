@@ -60,14 +60,7 @@ annotate service.Tests with @(
                 Value: modifiedAt,
             }
         ],
-    },
-    UI.Facets                     : [{
-        $Type : 'UI.ReferenceFacet',
-        ID    : 'GeneratedFacet1',
-        Label : '{i18n>testDetails}',
-        Target: '@UI.FieldGroup#GeneratedGroup1',
-    }, ]
-);
+    });
 
 annotate service.Tests with @(
     UI.HeaderInfo : {
@@ -83,4 +76,35 @@ annotate service.Tests with @(
             Value : description,
         }
     }
+);
+
+annotate service.Questions with @(
+    UI.LineItem : [
+        {
+            $Type : 'UI.DataField',
+            Value : text,
+            ![@UI.Importance] : #High,
+        },
+        {
+            $Type : 'UI.DataField',
+            Value : answer.text,
+            ![@UI.Importance] : #High,
+        },
+    ]
+);
+annotate service.Tests with @(
+    UI.Facets : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            ID : 'GeneratedFacet1',
+            Label : '{i18n>testDetails}',
+            Target : '@UI.FieldGroup#GeneratedGroup1',
+        },
+        {
+            $Type : 'UI.ReferenceFacet',
+            Target : 'questions/@UI.LineItem',
+            Label : '{i18n>questions}',
+            ID : 'QuestionsFacet1',
+        },
+    ]
 );

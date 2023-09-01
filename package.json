@@ -9,6 +9,8 @@
     "@sap/cds": "^7",
     "@sap/cds-common-content": "^1.2.0",
     "@sap/cds-fiori": "^1.0.0",
+    "@cap-js-community/odata-v2-adapter": "^1.11.6",
+    "@cap-js/graphql": "^0.6.2",
     "express": "^4"
   },
   "devDependencies": {
@@ -23,5 +25,16 @@
   },
   "sapux": [
     "app/sap-cap-ui5-challenge"
-  ]
+  ],
+  "cds": {
+    "cov2ap": {
+      "plugin": true
+    },
+    "protocols": {
+      "graphql": {
+        "path": "/graphql",
+        "impl": "@cap-js/graphql"
+      }
+    }
+  }
 }

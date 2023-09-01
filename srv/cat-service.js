@@ -6,18 +6,18 @@ module.exports = class DevChallengeService extends cds.ApplicationService {
         return super.init()
     }
 
-    async generateTestQuestions(TestsIn, id, questionsCount) {
+    async generateTestQuestions(TestsIn, keys, questionsCount) {
         const { Tests, Questions } = this.entities()
         const expr = cds.parse.expr(`test_ID is null`)
         const Items = await cds.run(
             SELECT.from(Questions).where(expr).limit(questionsCount))
       
         Items.forEach(item => {
-            item.test_ID = id
+            item.test_ID = keys.ID
             const expr = cds.parse.expr(`ID = '${item.ID}'`)
             cds.run(UPDATE.entity(Questions).data(item).where(expr))
         })
-        const expr2 = cds.parse.expr(`ID = '${id}'`)
+        const expr2 = cds.parse.expr(`ID = '${keys.ID}'`)
         const TestOutput = await cds.run(            
             SELECT.from(Tests).where(expr2)
         )

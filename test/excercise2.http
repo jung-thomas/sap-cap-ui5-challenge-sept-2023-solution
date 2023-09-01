@@ -1,4 +1,4 @@
-POST http://localhost:4004/dev-challenge/Tests(4c2b4962-08c5-4727-b184-4c76869f6653)/DevChallengeService.generateTestQuestions
+POST http://localhost:4004/odata/v4/dev-challenge/Tests(ID=4c2b4962-08c5-4727-b184-4c76869f6653,IsActiveEntity=true)/DevChallengeService.generateTestQuestions
 Content-Type: application/json
 
 {"questionsCount":2}
