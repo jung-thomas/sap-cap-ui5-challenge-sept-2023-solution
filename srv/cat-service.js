@@ -7,7 +7,7 @@ module.exports = class DevChallengeService extends cds.ApplicationService {
     }
 
     async generateTestQuestions(TestsIn, keys, questionsCount) {
-        const { Tests, Questions } = this.entities()
+        const { Tests, QuestionMaintenance } = this.entities()
         let message = ``
         if (!questionsCount || questionsCount < 1){
             message = `You asked for zero questions. Nothing to do.`
@@ -15,7 +15,7 @@ module.exports = class DevChallengeService extends cds.ApplicationService {
         }
 
         const Items = await cds.run(
-            SELECT.from(Questions).where({test_ID: null}).limit(questionsCount))
+            SELECT.from(QuestionMaintenance).where({test_ID: null}).limit(questionsCount))
 
         if(!Items || Items.length === 0){
             message =  `No Questions remaining that can be assigned to a test. Please create more`
@@ -24,7 +24,7 @@ module.exports = class DevChallengeService extends cds.ApplicationService {
 
         for await (const item of Items){
             item.test_ID = keys.ID
-            await cds.run(UPDATE.entity(Questions).data(item).where({ID: item.ID}))
+            await cds.run(UPDATE.entity(QuestionMaintenance).data(item).where({ID: item.ID}))
         }
         await cds.run(UPDATE.entity(Tests).set({modifiedAt: new Date()}).where({ID: keys.ID}))
 

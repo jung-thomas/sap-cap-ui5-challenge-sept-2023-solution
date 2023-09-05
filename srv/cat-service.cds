@@ -9,6 +9,21 @@ service DevChallengeService @(path: 'dev-challenge') {
     }
 
     @readonly
+    @cds.redirection.target
     entity Questions as projection on challenge.Questions;
-    extend  challenge.Answers with @readonly;
+    annotate Questions.answer with @readonly;
+    
+
+     @odata.draft.enabled: true
+     entity QuestionMaintenance as projection on challenge.Questions;
+
+
+    @readonly
+    @cds.redirection.target
+     entity TestMaintenance as projection on challenge.Tests;
+   
+
 }
+
+
+

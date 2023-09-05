@@ -94,11 +94,6 @@
                     "pattern": "Tests({key}):?query:",
                     "name": "TestsObjectPage",
                     "target": "TestsObjectPage"
-                },
-                {
-                    "pattern": "Tests({key})/questions({key2}):?query:",
-                    "name": "QuestionsObjectPage",
-                    "target": "QuestionsObjectPage"
                 }
             ],
             "targets": {
@@ -142,7 +137,7 @@
                                         "actions": {
                                             "press": "sapcapui5challenge.ext.actions.actions.generateTestQuestions",
                                             "visible": true,
-                                            "enabled": true,
+                                            "enabled": true,                                            
                                             "requiresSelection": false,
                                             "text": "Add Questions"
                                         }

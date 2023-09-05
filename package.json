@@ -6,25 +6,27 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "@sap/cds": "^7",
-    "@sap/cds-common-content": "^1.2.0",
-    "@sap/cds-fiori": "^1.0.0",
     "@cap-js-community/odata-v2-adapter": "^1.11.6",
-    "@cap-js/graphql": "^0.6.2",
+    "@cap-js/graphql": "^0.7.0",
+    "@sap/cds": "^7.2.0",
+    "@sap/cds-common-content": "^1.2.0",
+    "@sap/cds-fiori": "^1.1.0",
     "express": "^4"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
-    "@sap/ux-specification": "^1.108.12"
+    "@sap/ux-specification": "^1.108.13"
   },
   "scripts": {
     "start": "cds-serve",
     "dev": "cds watch --livereload false",
     "openapi": "cds compile srv --service all -o docs --to openapi --openapi:diagram",
-    "watch-sap-cap-ui5-challenge": "cds watch --open sap-cap-ui5-challenge/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-sap-cap-ui5-challenge": "cds watch --open sap-cap-ui5-challenge/webapp/index.html?sap-ui-xx-viewCache=false",
+    "watch-questions-maintenance": "cds watch --open questions-maintenance/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "sapux": [
-    "app/sap-cap-ui5-challenge"
+    "app/sap-cap-ui5-challenge",
+    "app/questions-maintenance"
   ],
   "cds": {
     "cov2ap": {

@@ -1,0 +1,139 @@
+{
+  "_version": "1.49.0",
+  "sap.app": {
+    "id": "questionsmaintenance",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:worklist",
+      "version": "1.10.4",
+      "toolsId": "9199a0d6-4c99-4a98-8b18-5b625e3aeec8"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/odata/v4/dev-challenge/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.117.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {},
+        "sap.fe.templates": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "questionsmaintenance.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server",
+          "autoExpandSelect": true,
+          "earlyRequests": true
+        }
+      },
+      "@i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      }
+    },
+    "resources": {
+      "css": []
+    },
+    "routing": {
+      "config": {},
+      "routes": [
+        {
+          "pattern": ":?query:",
+          "name": "QuestionMaintenanceList",
+          "target": "QuestionMaintenanceList"
+        },
+        {
+          "pattern": "QuestionMaintenance({key}):?query:",
+          "name": "QuestionMaintenanceObjectPage",
+          "target": "QuestionMaintenanceObjectPage"
+        }
+      ],
+      "targets": {
+        "QuestionMaintenanceList": {
+          "type": "Component",
+          "id": "QuestionMaintenanceList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "entitySet": "QuestionMaintenance",
+              "variantManagement": "Page",
+              "hideFilterBar": false,
+              "initialLoad": "Enabled",
+              "navigation": {
+                "QuestionMaintenance": {
+                  "detail": {
+                    "route": "QuestionMaintenanceObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "QuestionMaintenanceObjectPage": {
+          "type": "Component",
+          "id": "QuestionMaintenanceObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "entitySet": "QuestionMaintenance"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": [],
+    "archeType": "transactional"
+  }
+}

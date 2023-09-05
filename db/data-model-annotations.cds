@@ -3,7 +3,6 @@ using from './data-model';
 annotate fullstack_dev_challenge.Tests with @(
     title             : '{i18n>Tests}',
     Common.Label      : '{i18n>Tests}',
-    cds.odata.valuelist,
     Common.SemanticKey: [title]
 ) {
     ID          @(Common.Text: title);
@@ -13,6 +12,7 @@ annotate fullstack_dev_challenge.Tests with @(
         Common.ValueListWithFixedValues: false,
         Common.ValueList               : {
             CollectionPath: 'Tests',
+            SearchSupported: false,
             Parameters    : [{
                 $Type            : 'Common.ValueListParameterInOut',
                 LocalDataProperty: 'title',
@@ -25,7 +25,6 @@ annotate fullstack_dev_challenge.Tests with @(
 annotate fullstack_dev_challenge.Questions with @(
     title             : '{i18n>Questions}',
     Common.Label      : '{i18n>Questions',
-    cds.odata.valuelist,
     Common.SemanticKey: [text]
 ) {
     ID   @(Common.Text: text);
@@ -33,8 +32,9 @@ annotate fullstack_dev_challenge.Questions with @(
         title                          : '{i18n>questionText}',
         Common.ValueListWithFixedValues: false,
         Common.ValueList               : {
-            CollectionPath: 'Questions',
-            Parameters    : [{
+            CollectionPath : 'Questions',
+            SearchSupported: false,
+            Parameters     : [{
                 $Type            : 'Common.ValueListParameterInOut',
                 LocalDataProperty: 'text',
                 ValueListProperty: 'text'
