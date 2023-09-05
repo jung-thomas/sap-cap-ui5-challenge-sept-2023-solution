@@ -24,7 +24,7 @@ annotate fullstack_dev_challenge.Tests with @(
 
 annotate fullstack_dev_challenge.Questions with @(
     title             : '{i18n>Questions}',
-    Common.Label      : '{i18n>Questions',
+    Common.Label      : '{i18n>Questions}',
     Common.SemanticKey: [text]
 ) {
     ID   @(Common.Text: text);

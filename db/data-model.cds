@@ -2,10 +2,11 @@ using { cuid, managed } from '@sap/cds/common';
 
 namespace fullstack_dev_challenge; 
 
+@fiori.draft.enabled
 entity Tests: cuid, managed { 
   questions : Association to many Questions on questions.test = $self;
-  title : String;
-  description : String
+  title : localized String;
+  description : localized String;
 } 
 
 entity Questions : cuid { 
