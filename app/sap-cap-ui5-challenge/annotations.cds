@@ -144,9 +144,4 @@ annotate service.Tests.texts {
     )
 }
 
-using {sap} from '@sap/cds-common-content';
 
-extend service service {
-    @readonly
-    entity Languages as projection on sap.common.Languages;
-}

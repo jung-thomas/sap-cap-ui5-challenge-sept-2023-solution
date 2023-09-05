@@ -9,13 +9,14 @@ entity Tests: cuid, managed {
   description : localized String;
 } 
 
+@fiori.draft.enabled
 entity Questions : cuid { 
   test : Association to Tests;
-  text: String;
+  text: localized String;
   answer: Composition of one Answers;
 } 
 
 aspect Answers : cuid { 
-  text: String;
+  text: localized String;
 } 
 
