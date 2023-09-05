@@ -45,8 +45,8 @@ sap.ui.define([
             oOperation.setParameter("questionsCount", Number(questionsCount))
             oOperation.execute().then(async function () {
                 const oResults = oOperation.getBoundContext().getObject()
-                if (oResults && oResults.value[0] && oResults.value[0].message) {
-                    MessageBox.information(oResults.value[0].message)
+                if (oResults && oResults.value[0] && oResults.value) {
+                    MessageBox.information(oResults.value) 
                 }
                 await oBindingContext.refresh()
 
