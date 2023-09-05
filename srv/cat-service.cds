@@ -8,7 +8,7 @@ service DevChallengeService @(path: 'dev-challenge') {
         action generateTestQuestions(questionsCount : Integer) returns String;
     }
 
-    @odata.draft.enabled: true
+    @readonly
     entity Questions as projection on challenge.Questions;
-
+    extend  challenge.Answers with @readonly;
 }
