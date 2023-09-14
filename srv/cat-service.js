@@ -10,8 +10,9 @@ module.exports = class DevChallengeService extends cds.ApplicationService {
         const { Tests, QuestionMaintenance } = this.entities()
         let message = ``
         if (!questionsCount || questionsCount < 1){
-            message = `You asked for zero questions. Nothing to do.`
-            return message
+           // message = `You asked for zero questions. Nothing to do.`
+            throw new Error(`You asked for zero questions. Nothing to do.`)
+          //  return message
         }
 
         const Items = await cds.run(
