@@ -2,16 +2,15 @@ const cds = require('@sap/cds')
 module.exports = class DevChallengeService extends cds.ApplicationService {
 
     init() {
-
         return super.init()
     }
 
-    async generateTestQuestions(TestsIn, keys, questionsCount) {
+    async generateTestQuestions(TestsIn, keys, questionsCount, req) {
         const { Tests, QuestionMaintenance } = this.entities()
         let message = ``
         if (!questionsCount || questionsCount < 1){
            // message = `You asked for zero questions. Nothing to do.`
-            throw new Error(`You asked for zero questions. Nothing to do.`)
+            throw new cds.error(`You asked for zero questions. Nothing to do.`)
           //  return message
         }
 
